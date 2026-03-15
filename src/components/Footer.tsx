@@ -28,8 +28,12 @@ const Footer = () => {
           <div>
             <h4 className="font-accent text-sm uppercase tracking-wider text-honey mb-4">Quick Links</h4>
             <ul className="space-y-2.5">
-              {['Shop All', 'Best Sellers', 'New Arrivals', 'Gift Cards', 'Bundles & Kits'].map(link => (
-                <li key={link}><a href="#" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">{link}</a></li>
+              {[
+                { label: 'Shop All', to: '/shop' },
+                { label: 'Best Sellers', to: '/shop' },
+                { label: 'Checkout', to: '/checkout' },
+              ].map(link => (
+                <li key={link.label}><Link to={link.to} className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">{link.label}</Link></li>
               ))}
             </ul>
           </div>
@@ -38,8 +42,12 @@ const Footer = () => {
           <div>
             <h4 className="font-accent text-sm uppercase tracking-wider text-honey mb-4">Help & Support</h4>
             <ul className="space-y-2.5">
-              {['Contact Us', 'FAQs', 'Shipping & Delivery', 'Returns & Refunds', 'Track Your Order'].map(link => (
-                <li key={link}><a href="#" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">{link}</a></li>
+              {[
+                { label: 'Contact Us', to: '/contact' },
+                { label: 'FAQs', to: '/contact' },
+                { label: 'Shipping & Delivery', to: '/contact' },
+              ].map(link => (
+                <li key={link.label}><Link to={link.to} className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">{link.label}</Link></li>
               ))}
             </ul>
           </div>
@@ -48,8 +56,11 @@ const Footer = () => {
           <div>
             <h4 className="font-accent text-sm uppercase tracking-wider text-honey mb-4">About</h4>
             <ul className="space-y-2.5">
-              {['Our Story', 'Ingredients Glossary', 'Blog', 'Wholesale Inquiries', 'Affiliate Program'].map(link => (
-                <li key={link}><a href="#" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">{link}</a></li>
+              {[
+                { label: 'Our Story', to: '/about' },
+                { label: 'Blog', to: '/blog' },
+              ].map(link => (
+                <li key={link.label}><Link to={link.to} className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">{link.label}</Link></li>
               ))}
             </ul>
           </div>
