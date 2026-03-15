@@ -32,12 +32,12 @@ const Navbar = () => {
       >
         <div className="container flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2 group">
+          <Link to="/" className="flex items-center gap-2 group">
             <Leaf className="text-primary transition-transform duration-300 group-hover:rotate-12" size={28} />
             <span className="font-heading text-xl lg:text-2xl font-bold text-foreground tracking-tight">
               Herb & Heal
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-8">
