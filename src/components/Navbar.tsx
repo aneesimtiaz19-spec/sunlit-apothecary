@@ -85,10 +85,10 @@ const Navbar = () => {
         <div className="fixed inset-0 z-[100] bg-background/98 backdrop-blur-sm animate-fade-in-up">
           <div className="flex flex-col h-full p-6">
             <div className="flex justify-between items-center mb-12">
-              <a href="/" className="flex items-center gap-2">
+              <Link to="/" className="flex items-center gap-2">
                 <Leaf className="text-primary" size={28} />
                 <span className="font-heading text-xl font-bold">Herb & Heal</span>
-              </a>
+              </Link>
               <button onClick={() => setMobileOpen(false)} aria-label="Close menu">
                 <X size={24} />
               </button>
