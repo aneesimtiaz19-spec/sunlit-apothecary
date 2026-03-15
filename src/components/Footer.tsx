@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Leaf, Instagram, Facebook, Youtube, Twitter, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
@@ -7,10 +8,10 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 lg:gap-8">
           {/* Brand */}
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
-            <a href="/" className="flex items-center gap-2 mb-4">
+            <Link to="/" className="flex items-center gap-2 mb-4">
               <Leaf size={24} className="text-honey" />
               <span className="font-heading text-xl font-bold">Herb & Heal</span>
-            </a>
+            </Link>
             <p className="text-primary-foreground/70 text-sm mb-6 leading-relaxed">
               Bringing nature's healing power to your everyday life.
             </p>
