@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Search, User, Heart, ShoppingBag, Menu, X, Leaf } from 'lucide-react';
 
 const navLinks = [
-  'Shop All', 'Herbs & Supplements', 'Teas & Infusions', 'Skincare', 'Bundles', 'Blog'
+  { label: 'Shop All', href: '/shop' },
+  { label: 'Herbs & Supplements', href: '/shop' },
+  { label: 'Teas & Infusions', href: '/shop' },
+  { label: 'Skincare', href: '/shop' },
+  { label: 'Bundles', href: '/shop' },
+  { label: 'Blog', href: '#' },
 ];
 
 const Navbar = () => {
