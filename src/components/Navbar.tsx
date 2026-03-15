@@ -4,11 +4,9 @@ import { Search, User, Heart, ShoppingBag, Menu, X, Leaf } from 'lucide-react';
 
 const navLinks = [
   { label: 'Shop All', href: '/shop' },
-  { label: 'Herbs & Supplements', href: '/shop' },
-  { label: 'Teas & Infusions', href: '/shop' },
-  { label: 'Skincare', href: '/shop' },
-  { label: 'Bundles', href: '/shop' },
-  { label: 'Blog', href: '#' },
+  { label: 'About', href: '/about' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 const Navbar = () => {

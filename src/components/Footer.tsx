@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Leaf, Instagram, Facebook, Youtube, Twitter, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
@@ -7,10 +8,10 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 lg:gap-8">
           {/* Brand */}
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
-            <a href="/" className="flex items-center gap-2 mb-4">
+            <Link to="/" className="flex items-center gap-2 mb-4">
               <Leaf size={24} className="text-honey" />
               <span className="font-heading text-xl font-bold">Herb & Heal</span>
-            </a>
+            </Link>
             <p className="text-primary-foreground/70 text-sm mb-6 leading-relaxed">
               Bringing nature's healing power to your everyday life.
             </p>
@@ -27,8 +28,12 @@ const Footer = () => {
           <div>
             <h4 className="font-accent text-sm uppercase tracking-wider text-honey mb-4">Quick Links</h4>
             <ul className="space-y-2.5">
-              {['Shop All', 'Best Sellers', 'New Arrivals', 'Gift Cards', 'Bundles & Kits'].map(link => (
-                <li key={link}><a href="#" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">{link}</a></li>
+              {[
+                { label: 'Shop All', to: '/shop' },
+                { label: 'Best Sellers', to: '/shop' },
+                { label: 'Checkout', to: '/checkout' },
+              ].map(link => (
+                <li key={link.label}><Link to={link.to} className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">{link.label}</Link></li>
               ))}
             </ul>
           </div>
@@ -37,8 +42,12 @@ const Footer = () => {
           <div>
             <h4 className="font-accent text-sm uppercase tracking-wider text-honey mb-4">Help & Support</h4>
             <ul className="space-y-2.5">
-              {['Contact Us', 'FAQs', 'Shipping & Delivery', 'Returns & Refunds', 'Track Your Order'].map(link => (
-                <li key={link}><a href="#" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">{link}</a></li>
+              {[
+                { label: 'Contact Us', to: '/contact' },
+                { label: 'FAQs', to: '/contact' },
+                { label: 'Shipping & Delivery', to: '/contact' },
+              ].map(link => (
+                <li key={link.label}><Link to={link.to} className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">{link.label}</Link></li>
               ))}
             </ul>
           </div>
@@ -47,8 +56,11 @@ const Footer = () => {
           <div>
             <h4 className="font-accent text-sm uppercase tracking-wider text-honey mb-4">About</h4>
             <ul className="space-y-2.5">
-              {['Our Story', 'Ingredients Glossary', 'Blog', 'Wholesale Inquiries', 'Affiliate Program'].map(link => (
-                <li key={link}><a href="#" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">{link}</a></li>
+              {[
+                { label: 'Our Story', to: '/about' },
+                { label: 'Blog', to: '/blog' },
+              ].map(link => (
+                <li key={link.label}><Link to={link.to} className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">{link.label}</Link></li>
               ))}
             </ul>
           </div>
