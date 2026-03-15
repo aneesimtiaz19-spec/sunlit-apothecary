@@ -107,7 +107,7 @@ const BestSellers = () => {
         </div>
 
         <div className="text-center mt-12 scroll-reveal">
-          <a href="#" className="inline-flex items-center gap-2 text-primary font-medium hover:underline underline-offset-4">
+          <a href="/shop" className="inline-flex items-center gap-2 text-primary font-medium hover:underline underline-offset-4">
             View All Products →
           </a>
         </div>

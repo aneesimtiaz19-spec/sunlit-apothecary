@@ -95,15 +95,15 @@ const Navbar = () => {
             </div>
             <div className="flex flex-col gap-6">
               {navLinks.map((link, i) => (
-                <a
-                  key={link}
-                  href="#"
+                <Link
+                  key={link.label}
+                  to={link.href}
                   className="text-2xl font-heading font-semibold text-foreground hover:text-primary transition-colors"
                   style={{ animationDelay: `${i * 0.05}s` }}
                   onClick={() => setMobileOpen(false)}
                 >
-                  {link}
-                </a>
+                  {link.label}
+                </Link>
               ))}
             </div>
             <div className="mt-auto flex items-center gap-6 pb-8">
