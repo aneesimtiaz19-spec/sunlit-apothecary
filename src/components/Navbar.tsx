@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Search, User, Heart, ShoppingBag, Menu, X, Leaf } from 'lucide-react';
 
 const navLinks = [
-  'Shop All', 'Herbs & Supplements', 'Teas & Infusions', 'Skincare', 'Bundles', 'Blog'
+  { label: 'Shop All', href: '/shop' },
+  { label: 'Herbs & Supplements', href: '/shop' },
+  { label: 'Teas & Infusions', href: '/shop' },
+  { label: 'Skincare', href: '/shop' },
+  { label: 'Bundles', href: '/shop' },
+  { label: 'Blog', href: '#' },
 ];
 
 const Navbar = () => {
@@ -26,23 +32,23 @@ const Navbar = () => {
       >
         <div className="container flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2 group">
+          <Link to="/" className="flex items-center gap-2 group">
             <Leaf className="text-primary transition-transform duration-300 group-hover:rotate-12" size={28} />
             <span className="font-heading text-xl lg:text-2xl font-bold text-foreground tracking-tight">
               Herb & Heal
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
-                key={link}
-                href="#"
+              <Link
+                key={link.label}
+                to={link.href}
                 className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-[-4px] after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
               >
-                {link}
-              </a>
+                {link.label}
+              </Link>
             ))}
           </div>
 
@@ -79,25 +85,25 @@ const Navbar = () => {
         <div className="fixed inset-0 z-[100] bg-background/98 backdrop-blur-sm animate-fade-in-up">
           <div className="flex flex-col h-full p-6">
             <div className="flex justify-between items-center mb-12">
-              <a href="/" className="flex items-center gap-2">
+              <Link to="/" className="flex items-center gap-2">
                 <Leaf className="text-primary" size={28} />
                 <span className="font-heading text-xl font-bold">Herb & Heal</span>
-              </a>
+              </Link>
               <button onClick={() => setMobileOpen(false)} aria-label="Close menu">
                 <X size={24} />
               </button>
             </div>
             <div className="flex flex-col gap-6">
               {navLinks.map((link, i) => (
-                <a
-                  key={link}
-                  href="#"
+                <Link
+                  key={link.label}
+                  to={link.href}
                   className="text-2xl font-heading font-semibold text-foreground hover:text-primary transition-colors"
                   style={{ animationDelay: `${i * 0.05}s` }}
                   onClick={() => setMobileOpen(false)}
                 >
-                  {link}
-                </a>
+                  {link.label}
+                </Link>
               ))}
             </div>
             <div className="mt-auto flex items-center gap-6 pb-8">
