@@ -1,25 +1,20 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Heart, Eye, ShoppingBag, Star } from 'lucide-react';
+import { products as allProducts } from '@/data/products';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
-const filters = ['All', 'Immunity', 'Digestion', 'Stress Relief', 'Skin & Hair'];
+const filters = ['All', 'Immunity', 'Digestion', 'Stress Relief', 'Skin & Glow'];
 
-const products = [
-  { name: 'Ashwagandha Root Powder', benefit: 'Reduces stress & boosts energy', price: 599, originalPrice: 799, rating: 4.8, reviews: 2341, badge: 'Best Seller', badgeColor: 'bg-primary', category: 'Stress Relief', emoji: '🌿' },
-  { name: 'Immunity Booster Tea', benefit: 'Strengthens natural defenses', price: 449, originalPrice: 599, rating: 4.9, reviews: 1856, badge: 'New', badgeColor: 'bg-honey', category: 'Immunity', emoji: '🍵' },
-  { name: 'Turmeric Golden Milk Mix', benefit: 'Anti-inflammatory powerhouse', price: 399, originalPrice: 549, rating: 4.7, reviews: 3102, badge: '20% OFF', badgeColor: 'bg-terracotta', category: 'Immunity', emoji: '✨' },
-  { name: 'Brahmi Memory Capsules', benefit: 'Enhances focus & mental clarity', price: 699, originalPrice: 899, rating: 4.8, reviews: 1204, badge: 'Best Seller', badgeColor: 'bg-primary', category: 'Stress Relief', emoji: '🧠' },
-  { name: 'Aloe Vera Skin Gel', benefit: 'Hydrates & heals naturally', price: 349, originalPrice: 499, rating: 4.6, reviews: 987, badge: null, badgeColor: '', category: 'Skin & Hair', emoji: '🧴' },
-  { name: 'Triphala Digestive Powder', benefit: 'Supports healthy digestion', price: 299, originalPrice: 399, rating: 4.9, reviews: 4521, badge: 'Best Seller', badgeColor: 'bg-primary', category: 'Digestion', emoji: '🌱' },
-  { name: 'Chamomile Sleep Tea', benefit: 'Promotes restful deep sleep', price: 379, originalPrice: 499, rating: 4.8, reviews: 2105, badge: 'New', badgeColor: 'bg-honey', category: 'Stress Relief', emoji: '😴' },
-  { name: 'Neem & Tulsi Face Wash', benefit: 'Clears skin, fights acne', price: 449, originalPrice: 599, rating: 4.7, reviews: 1567, badge: null, badgeColor: '', category: 'Skin & Hair', emoji: '🌸' },
-];
+const bestSellerProducts = allProducts.slice(0, 8);
 
 const BestSellers = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const ref = useScrollReveal();
 
-  const filtered = activeFilter === 'All' ? products : products.filter(p => p.category === activeFilter);
+  const filtered = activeFilter === 'All'
+    ? bestSellerProducts
+    : bestSellerProducts.filter(p => p.concern.includes(activeFilter));
 
   return (
     <section id="bestsellers" className="py-20 lg:py-28 bg-muted/40" ref={ref}>
@@ -52,8 +47,9 @@ const BestSellers = () => {
         {/* Product Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
           {filtered.map((product, i) => (
-            <div
-              key={product.name}
+            <Link
+              to={`/product/${product.slug}`}
+              key={product.id}
               className="scroll-reveal group bg-card rounded-2xl overflow-hidden border border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               style={{ transitionDelay: `${i * 0.05}s` }}
             >
@@ -67,15 +63,19 @@ const BestSellers = () => {
                     {product.badge}
                   </span>
                 )}
-                <button className="absolute top-3 right-3 text-muted-foreground hover:text-terracotta transition-colors" aria-label="Add to wishlist">
+                <button
+                  className="absolute top-3 right-3 text-muted-foreground hover:text-terracotta transition-colors z-10"
+                  aria-label="Add to wishlist"
+                  onClick={(e) => e.preventDefault()}
+                >
                   <Heart size={18} />
                 </button>
                 {/* Hover actions */}
                 <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-foreground/60 to-transparent p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:flex items-center justify-center gap-3">
-                  <button className="bg-card/90 text-foreground rounded-full p-2 hover:bg-card transition-colors" aria-label="Quick view">
-                    <Eye size={16} />
-                  </button>
-                  <button className="bg-primary text-primary-foreground rounded-full px-4 py-2 text-xs font-medium flex items-center gap-1.5 hover:opacity-90 transition-opacity">
+                  <button
+                    className="bg-primary text-primary-foreground rounded-full px-4 py-2 text-xs font-medium flex items-center gap-1.5 hover:opacity-90 transition-opacity"
+                    onClick={(e) => e.preventDefault()}
+                  >
                     <ShoppingBag size={14} /> Add to Cart
                   </button>
                 </div>
@@ -85,7 +85,7 @@ const BestSellers = () => {
               <div className="p-4">
                 <div className="flex items-center gap-1 mb-1.5">
                   {Array.from({ length: 5 }).map((_, j) => (
-                    <Star key={j} size={12} className="fill-honey text-honey" />
+                    <Star key={j} size={12} className={j < Math.round(product.rating) ? "fill-honey text-honey" : "text-muted"} />
                   ))}
                   <span className="text-[11px] text-muted-foreground ml-1">{product.rating}</span>
                 </div>
@@ -98,18 +98,21 @@ const BestSellers = () => {
                   <span className="text-xs text-muted-foreground line-through">₹{product.originalPrice}</span>
                 </div>
                 {/* Mobile add to cart */}
-                <button className="lg:hidden mt-3 w-full bg-primary text-primary-foreground rounded-lg py-2 text-sm font-medium flex items-center justify-center gap-1.5">
+                <button
+                  className="lg:hidden mt-3 w-full bg-primary text-primary-foreground rounded-lg py-2 text-sm font-medium flex items-center justify-center gap-1.5"
+                  onClick={(e) => e.preventDefault()}
+                >
                   <ShoppingBag size={14} /> Add to Cart
                 </button>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
         <div className="text-center mt-12 scroll-reveal">
-          <a href="/shop" className="inline-flex items-center gap-2 text-primary font-medium hover:underline underline-offset-4">
+          <Link to="/shop" className="inline-flex items-center gap-2 text-primary font-medium hover:underline underline-offset-4">
             View All Products →
-          </a>
+          </Link>
         </div>
       </div>
     </section>
